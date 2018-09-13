@@ -3,8 +3,8 @@ import { Util } from '../js/util/util.js'
 import { Tpl } from '../js/view/template.js'
 
 let walletView = new WalletView(Tpl);
-let money = { 10: 5, 50: 4, 100: 8, 500: 5, 1000: 5, 5000: 3, 10000: 1 };
-let fullAmount = 23550;
+let money = null;
+let fullAmount = null;
 document.body.innerHTML =
     `<div class="wallet">
             <div class="wallet_container">
@@ -16,6 +16,13 @@ document.body.innerHTML =
         </div>`;
 
 describe('walletView Test', () => {
+    beforeEach(() => {
+        money = { 10: 5, 50: 4, 100: 8, 500: 5, 1000: 5, 5000: 3, 10000: 1 };
+        fullAmount = 0;
+        for (let key in money) {
+            fullAmount += key * money[key];
+        }
+    })
 
     describe('지갑을 랜더링한다', () => {
 
@@ -33,20 +40,20 @@ describe('walletView Test', () => {
         });
 
         test('총액이 랜더링된다', () => {
-            const expected = '23,550원';
+            console.log(fullAmount);
+            const expected = `${Util.numberWithCommas(fullAmount)}원`;
             walletView.renderFullAmount(fullAmount);
             expect(document.querySelector('.full_amount').innerHTML).toBe(expected);
         });
     });
 
     describe('돈을 자판기에 넣는다', () => {
-        walletView.renderMoney(money);
-        walletView.renderFullAmount(fullAmount);
-        // 5000원을 사용하여 5000원의 개수와 총액 변화
-        const changedMoney = { 10: 5, 50: 4, 100: 8, 500: 5, 1000: 5, 5000: 2, 10000: 1 };
-        const changedFullAmount = 18550;
 
         test('5000원이 사용됨에 따라 랜더링이 업데이트된다', () => {
+            walletView.renderMoney(money);
+            walletView.renderFullAmount(fullAmount);
+            const changedMoney = { 10: 5, 50: 4, 100: 8, 500: 5, 1000: 5, 5000: 2, 10000: 1 };
+            const changedFullAmount = 18550;
             walletView.updateRendering(["5000"], changedMoney, changedFullAmount);
 
             expect(document.querySelector('[data-money="5000"]').nextElementSibling.innerText).toBe('2개');

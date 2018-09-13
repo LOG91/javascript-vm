@@ -46,7 +46,10 @@ describe('machineView Test', () => {
       test('투입한 금액으로 살 수 있는 상품이 하이라이트된다', () => {
         const TOTAL_INSERTED_MONEY = 700;
         machineView.renderMachine(testItems);
-        const expected = 3; // 700원 아래의 Item 3개
+        const expected = testItems.reduce((ac, cv) => {
+          if (cv.price <= TOTAL_INSERTED_MONEY) ac++;
+          return ac;
+        }, 0); // 700원 아래의 Item 3개
 
         machineView.renderAvailableItem(TOTAL_INSERTED_MONEY);
 

@@ -80,9 +80,6 @@ describe('vmController TEST', () => {
       });
 
       test('상품 번호 측정 중에 번호를 다시 클릭하면 타이머가 리셋된다', () => {
-        const button1 = document.querySelector('[data-select="1"]');
-        const button2 = document.querySelector('[data-select="2"]');
-
         vm.clickItemNumberButton(button1);
         const firstSetTimeout = vm.setTimeoutItemNumber.current;
         vm.clickItemNumberButton(button2);
