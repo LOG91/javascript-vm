@@ -1,8 +1,8 @@
 import WalletView from '../js/view/walletView.js'
 import { Util } from '../js/util/util.js'
-import { Temp } from '../js/view/template.js'
+import { Tpl } from '../js/view/template.js'
 
-let walletView = new WalletView(Temp);
+let walletView = new WalletView(Tpl);
 let money = { 10: 5, 50: 4, 100: 8, 500: 5, 1000: 5, 5000: 3, 10000: 1 };
 let fullAmount = 23550;
 document.body.innerHTML =

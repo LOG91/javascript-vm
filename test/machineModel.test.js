@@ -1,5 +1,5 @@
 import MachineModel from '../js/model/machineModel.js';
-import { Temp } from '../js/view/template.js';
+import { Tpl } from '../js/view/template.js';
 
 describe('MachineModel Test', () => {
   const itemList =
@@ -11,7 +11,7 @@ describe('MachineModel Test', () => {
     { name: '봉봉', price: 1200, stock: 5, imageName: 'bongbong.png' },
     { name: '코코아주스', price: 1000, stock: 5, imageName: 'chocoMilk.png' },
     { name: '콜라제로', price: 1000, stock: 5, imageName: 'coke.png' }];
-  const dList = Temp.itemListTemp(itemList);
+  const dList = Tpl.itemListTemp(itemList);
   document.body.innerHTML = dList;
 
   describe('MachineModel을 초기화한다', () => {

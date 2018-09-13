@@ -5,11 +5,11 @@ import MachineModel from '../js/model/machineModel.js';
 import { WalletModel } from '../js/model/walletModel.js';
 import { money } from '../js/model/money.js';
 import { item } from '../js/model/item.js';
-import { Temp } from '../js/view/template.js';
-import { basicTemp } from '../test/testTemplate.js';
+import { Tpl } from '../js/view/template.js';
+import { basicTpl } from '../test/testTemplate.js';
 
-const walletView = new WalletView(Temp);
-const machineView = new MachineView(Temp);
+const walletView = new WalletView(Tpl);
+const machineView = new MachineView(Tpl);
 const walletModel = new WalletModel(money);
 const machineModel = new MachineModel(item);
 
@@ -18,7 +18,7 @@ const vm = new VendingMachine(machineModel, walletModel, machineView, walletView
 describe('vmController TEST', () => {
   beforeEach(() => {
     vm.initializeConnection();
-    document.body.innerHTML += basicTemp;
+    document.body.innerHTML += basicTpl;
     walletModel.money = { 500: 3, 1000: 2, 5000: 0 };
     walletView.renderWallet(walletModel.getMoneyList(), walletModel.getFullAmount());
     machineView.initializeView(item);

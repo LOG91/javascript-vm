@@ -1,5 +1,5 @@
 import { Util } from '../util/util.js'
-const Temp = {
+const Tpl = {
   itemListTemp(itemList) {
     let itemListString = itemList.reduce((acc, ele, idx) => {
       acc +=
@@ -61,4 +61,4 @@ const Temp = {
   }
 }
 
-export { Temp }
+export { Tpl }

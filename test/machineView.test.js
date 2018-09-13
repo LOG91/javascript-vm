@@ -1,15 +1,15 @@
 import MachineView from '../js/view/machineView.js';
-import { Temp } from '../js/view/template.js';
-import { basicTemp } from '../test/testTemplate.js';
+import { Tpl } from '../js/view/template.js';
+import { basicTpl } from '../test/testTemplate.js';
 
-const machineView = new MachineView(Temp);
+const machineView = new MachineView(Tpl);
 const testItems = [{ name: '콜라', price: 500, stock: 5, imageName: 'coke.png' },
 { name: '사이다', price: 1000, stock: 5, imageName: 'cider.png' },
 { name: '파인애플맛 환타', price: 400, stock: 5, imageName: 'fanta_pineapple.png' },
 { name: '포도맛 환타', price: 300, stock: 5, imageName: 'fanta_grape.png' }];
 
 function initialze() {
-  document.body.innerHTML = basicTemp;
+  document.body.innerHTML = basicTpl;
 
 }
 
@@ -20,14 +20,14 @@ describe('machineView Test', () => {
   describe('자판기를 랜더링 한다', () => {
     describe('itemList가 랜더링된다', () => {
 
-      test('해당 번호의 아이템이 올바른 node로 랜더링됐다', () => {
-        const expected = `<div data-price="500" data-number="1" class="item_price">1. 500</div>`;
+      test('해당 번호의 아이템이 지정한 template으로 랜더링됐다', () => {
+        const ITEM_NUMBER = 1;
+        const expected = `<div data-price="500" data-number="${ITEM_NUMBER}" class="item_price">${ITEM_NUMBER}. ${testItems[ITEM_NUMBER - 1].price}</div>`;
 
         machineView.renderMachine(testItems);
         const number1Node = document.querySelector('.item_list_container');
 
         expect(number1Node.innerHTML).toContain(expected);
-        number1Node.dataset.price === 500
       });
     });
 

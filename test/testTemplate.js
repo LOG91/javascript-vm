@@ -1,4 +1,4 @@
-const basicTemp = `<div class="vending_machine_wrap">
+const basicTpl = `<div class="vending_machine_wrap">
 <div class="item_display">
   <ul class="item_list_container"></ul>
 </div>
@@ -44,4 +44,4 @@ const basicTemp = `<div class="vending_machine_wrap">
   </div>
 </div>`;
 
-export { basicTemp };
+export { basicTpl };

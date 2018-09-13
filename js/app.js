@@ -7,14 +7,14 @@ import { WalletModel } from './model/walletModel.js'
 import MachineModel from './model/machineModel.js'
 import { money } from './model/money.js'
 import { item } from './model/item.js'
-import { Temp } from './view/template.js'
+import { Tpl } from './view/template.js'
 import VendingMachine from './controller/vmController.js'
 
 
 const machineModel = new MachineModel(item);
 const walletModel = new WalletModel(money);
-const machineView = new MachineView(Temp);
-const walletView = new WalletView(Temp);
+const machineView = new MachineView(Tpl);
+const walletView = new WalletView(Tpl);
 const vendingMachine = new VendingMachine(machineModel, walletModel, machineView, walletView);
 
 const moneyList = walletModel.getMoneyList();
