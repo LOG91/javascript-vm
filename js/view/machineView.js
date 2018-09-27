@@ -2,7 +2,7 @@
   Machine 랜더링을 담당하는 파일
   초기 디스플레이, 이벤트 시에 화면 변화를 담당한다
 */
-import { Util } from '../Util/util.js'
+import { Util } from "../Util/util.js";
 export default class MachineView {
   constructor(template) {
     this.clickItemNumberButton = null;
@@ -11,7 +11,9 @@ export default class MachineView {
 
   initializeView(itemList) {
     this.renderMachine(itemList);
-    document.addEventListener('DOMContentLoaded', () => { this.addEventClickedItemNumber() });
+    document.addEventListener("DOMContentLoaded", () => {
+      this.addEventClickedItemNumber();
+    });
   }
 
   renderMachine(itemList) {
@@ -19,10 +21,13 @@ export default class MachineView {
   }
 
   addEventClickedItemNumber() {
-    const itemNumberNode = document.querySelector('.coin_button_list_container');
-    itemNumberNode.addEventListener('click', ({ target }) => {
-      if (target.className === 'coin_button') this.clickItemNumberButton(target);
-    })
+    const itemNumberNode = document.querySelector(
+      ".coin_button_list_container"
+    );
+    itemNumberNode.addEventListener("click", ({ target }) => {
+      if (target.className === "coin_button")
+        this.clickItemNumberButton(target);
+    });
   }
 
   renderFromMoneyInserted(insertedMoney, totalInsertedMoney) {
@@ -42,15 +47,17 @@ export default class MachineView {
   }
 
   renderSelectedItemImage(itemList, itemNumber) {
-    const itemName = document.querySelector(`[data-number="${itemNumber}"]`).previousElementSibling.innerHTML;
+    const itemName = document.querySelector(`[data-number="${itemNumber}"]`)
+      .previousElementSibling.innerHTML;
     const item = itemList.filter(v => v.name === itemName)[0];
-    const imageListNode = document.querySelector('.image_list');
+    const imageListNode = document.querySelector(".image_list");
     const imageItemString = this.TMP.itemImageTemp(item.imageName);
-    imageListNode.insertAdjacentHTML('afterBegin', imageItemString);
+    imageListNode.insertAdjacentHTML("afterBegin", imageItemString);
   }
 
   renderSelectedItemLog(itemNumber) {
-    const itemName = document.querySelector(`[data-number="${itemNumber}"]`).previousElementSibling.innerHTML;
+    const itemName = document.querySelector(`[data-number="${itemNumber}"]`)
+      .previousElementSibling.innerHTML;
     const logItemString = this.TMP.selectedItemLog(itemNumber, itemName);
     this.renderLog(logItemString);
   }
@@ -66,25 +73,25 @@ export default class MachineView {
   }
 
   renderLog(message) {
-    const logListNode = document.querySelector('.log_list');
-    logListNode.insertAdjacentHTML('afterBegin', message);
+    const logListNode = document.querySelector(".log_list");
+    logListNode.insertAdjacentHTML("afterBegin", message);
   }
 
   renderItem(itemList) {
     const itemListString = this.TMP.itemListTemp(itemList);
-    document.querySelector('.item_list_container').innerHTML = itemListString;
+    document.querySelector(".item_list_container").innerHTML = itemListString;
   }
 
   renderTotalInsertedMoney(totalInsertedMoney) {
-    let currentCoin = document.querySelector('.current_coin');
+    let currentCoin = document.querySelector(".current_coin");
     currentCoin.innerHTML = `${Util.numberWithCommas(totalInsertedMoney)}원`;
   }
 
   renderAvailableItem(totalInsertedMoney) {
-    const itemList = document.querySelectorAll('.item_price');
-    const availableItemClass = 'available_item';
+    const itemList = document.querySelectorAll(".item_price");
+    const availableItemClass = "available_item";
     for (let ele of itemList) {
-      if (ele.getAttribute('data-price') <= totalInsertedMoney) {
+      if (ele.getAttribute("data-price") <= totalInsertedMoney) {
         ele.classList.toggle(availableItemClass, true);
       } else {
         ele.classList.toggle(availableItemClass, false);
@@ -98,10 +105,10 @@ export default class MachineView {
   }
 
   alertShortOfMoney() {
-    alert('돈이 부족합니다');
+    alert("돈이 부족합니다");
   }
 
   alertNotAvailableNumber() {
-    alert('번호가 유효하지 않습니다')
+    alert("번호가 유효하지 않습니다");
   }
 }
